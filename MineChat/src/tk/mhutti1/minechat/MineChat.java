@@ -1,4 +1,11 @@
 package tk.mhutti1.minechat;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
+
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -7,18 +14,40 @@ import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 public final class MineChat extends JavaPlugin{
-	 private static final Plugin MineChat = null;
+	 //private static final Plugin MineChat = null;
 	@Override
 	    public void onEnable(){
 	        // TODO Insert logic to be performed when the plugin is enabled
 		 getLogger().info("MineChat has been initialized.");
+		 try{
+			 
 		 
-
+		 final URL url = new URL("http://www.buildcast-tinywebdb.appspot.com/update");
+		 URLConnection con = url.openConnection();
+		 InputStream in = con.getInputStream();
+		 String encoding = con.getContentEncoding();
+		 encoding = encoding == null ? "UTF-8" : encoding;
+		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		 byte[] buf = new byte[8192];
+		 int len = 0;
+		 while ((len = in.read(buf)) != -1) {
+		     baos.write(buf, 0, len);
+		 }
+		 String body = new String(baos.toByteArray(), encoding);
+		 getLogger().info(body);
 	    }
+	        catch (UnknownHostException e)
+	        {
+	           
+	        }
+	        catch (IOException e)
+	        {
+	           
+	        }
+	}
+
 	 
 	    @Override
 	    public void onDisable() {
