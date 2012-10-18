@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="17" version="2.0">
+<workbench progressCount="16" version="2.0">
 <workbenchAdvisor/>
 <window height="671" maximized="true" width="1038" x="1409" y="88">
 <fastViewData fastViewLocation="1024"/>
@@ -8,7 +8,7 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="121" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="adt.actionSet.avdManager" itemType="typeToolBarContribution" x="62" y="22"/>
 <coolItem id="adt.actionSet.lint" itemType="typeToolBarContribution" x="52" y="22"/>
@@ -43,11 +43,11 @@
 </editorArea>
 <editor id="org.eclipse.ui.DefaultTextEditor" name="plugin.yml" partName="plugin.yml" path="C:/Documents and Settings/Administrator/workspace/MineChat/plugin.yml" title="plugin.yml" tooltip="MineChat/plugin.yml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/MineChat/plugin.yml"/>
-<editorState selectionHorizontalPixel="0" selectionLength="102" selectionOffset="161" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="145" selectionTopPixel="0"/>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MineChat.java" partName="MineChat.java" path="C:/Documents and Settings/Administrator/workspace/MineChat/src/tk/mhutti1/minechat/MineChat.java" title="MineChat.java" tooltip="MineChat/src/tk/mhutti1/minechat/MineChat.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/MineChat/src/tk/mhutti1/minechat/MineChat.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2023" selectionTopPixel="935"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6308" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -63,9 +63,9 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (1 item)"/>
 <category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Warnings (13 items)"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="75" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.resourceField="75" org.eclipse.ui.ide.severityAndDescriptionField="844"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -250,160 +250,159 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/MineChat/src/tk/mhutti1/minechat/MineChat.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/MineChat/plugin.yml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/MineChat/plugin.yml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/MineChat/src/tk/mhutti1/minechat/MineChat.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/MineChat/plugin.yml"/>
 </editors>
-<item historyLabel="plugin.yml" index="1">
-<position info="not_deleted" x="507" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position info="not_deleted" x="1612" y="0"/>
-</item>
-<item historyLabel="plugin.yml" index="1">
-<position/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position/>
-</item>
-<item historyLabel="plugin.yml" index="1">
-<position/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position/>
-</item>
-<item historyLabel="plugin.yml" index="1">
-<position info="not_deleted" x="403" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position info="not_deleted" x="642" y="0"/>
-</item>
-<item historyLabel="plugin.yml" index="1">
-<position info="not_deleted" x="458" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position info="not_deleted" x="642" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position info="not_deleted" x="2003" y="0"/>
-</item>
-<item historyLabel="plugin.yml" index="1">
-<position info="not_deleted" x="276" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="0">
-<position info="not_deleted" x="1428" y="215"/>
-</item>
-<item historyLabel="plugin.yml" index="2">
-<position info="not_deleted" x="276" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1016" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1137" y="11"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1016" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="3173" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1564" y="1"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1586" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1320" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1564" y="1"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1107" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1564" y="1"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position info="not_deleted" x="1083" y="0"/>
-</item>
-<item historyLabel="MineChat.java" index="3">
-<position/>
-</item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="1182" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="802" y="0"/>
 </item>
-<item historyLabel="plugin.yml" index="2">
+<item historyLabel="plugin.yml" index="0">
 <position info="not_deleted" x="161" y="102"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="875" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="1187" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="1481" y="4"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="2726" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="771" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="706" y="8"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="678" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="555" y="24"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="523" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="555" y="24"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="956" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="2744" y="0"/>
 </item>
-<item historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="2664" y="0"/>
 </item>
-<item active="true" historyLabel="MineChat.java" index="3">
+<item historyLabel="MineChat.java" index="1">
 <position info="not_deleted" x="2739" y="0"/>
+</item>
+<item historyLabel="plugin.yml" index="2">
+<position info="not_deleted" x="236" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="6317" y="0"/>
+</item>
+<item historyLabel="plugin.yml" index="2">
+<position info="not_deleted" x="236" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="6457" y="0"/>
+</item>
+<item historyLabel="plugin.yml" index="2">
+<position info="not_deleted" x="89" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="6457" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="3618" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="3306" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="3688" y="16"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="3438" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="5415" y="1"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="2775" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="2781" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="4327" y="0"/>
+</item>
+<item historyLabel="plugin.yml" index="2">
+<position info="not_deleted" x="193" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="4327" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position/>
+</item>
+<item historyLabel="plugin.yml" index="2">
+<position info="not_deleted" x="145" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="5966" y="0"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="3766" y="3"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="37" y="22"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="200" y="25"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="783" y="8"/>
+</item>
+<item historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="5816" y="0"/>
+</item>
+<item active="true" historyLabel="MineChat.java" index="1">
+<position info="not_deleted" x="5735" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

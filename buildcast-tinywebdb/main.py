@@ -334,8 +334,7 @@ class getcode(webapp.RequestHandler):
 		self.response.out.write("If you are looking to hack this site then think again")
 		self.response.out.write('''
 		<html><body>
-		<form action="/verify" method="post"
-		enctype=application/x-www-form-urlencoded>
+		<form action="/verify" method="post">
 		Please type /getverifcode your-google@email into minecraft to get the vefification code.
 		<p>Code<input type="text" name="code"></p>
 		MineCraft Name<input type="text" name="mcname">
@@ -345,8 +344,7 @@ class chatline(webapp.RequestHandler):
 	def post(self):
 		self.response.out.write('''
 		<html><body>
-		<form action="/addchatline" method="post"
-		enctype=application/x-www-form-urlencoded>
+		<form action="/addchatline" method="post">
 		Please type /getverifcode your-google@email into minecraft to get the vefification code.
 		<p>Code<input type="text" name="user"></p>
 		MineCraft Name<input type="text" name="message">
