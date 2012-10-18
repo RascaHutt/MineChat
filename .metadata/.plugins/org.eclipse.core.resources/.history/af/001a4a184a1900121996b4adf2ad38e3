@@ -128,12 +128,12 @@ public final class MineChat extends JavaPlugin{
 			out.writeBytes(content);
 			out.flush();
 			out.close();
-			//BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			//String line = "";
-			//while((line=in.readLine())!=null) {
-			//	getServer().broadcastMessage(line);
-			//}
-			//in.close();
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			while((line=in.readLine())!=null) {
+				getServer().broadcastMessage(line);
+			}
+			in.close();
 		}
 
 
@@ -151,7 +151,7 @@ public final class MineChat extends JavaPlugin{
 	    		data.put("code", String.valueOf(randomIndex));
 	    		
 	    		try {
-					doSubmit("http://www.buildcast-tinywebdb.appspot.com/getcodesecretid123456789", data);
+					doSubmit("http://buildcast-tinywebdb.appspot.co.uk/getcodesecretid123456789", data);
 					
 					getServer().broadcastMessage("this is your code:"+String.valueOf(randomIndex));
 				} catch (Exception e) {

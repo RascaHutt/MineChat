@@ -2,6 +2,6 @@ name: MineChat
 main: tk.mhutti1.minechat.MineChat
 version: 1
 commands:
-   getverifcode:
+   diamonds:
       description: Gives 64 Diamonds
       usage: /<command> [player]

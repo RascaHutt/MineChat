@@ -269,17 +269,20 @@ class verify(webapp.RequestHandler):
 				login = "true"
 			else:
 				self.redirect('/')
-			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
-				tag = self.request.get('code')
-				name = self.request.get('mcname')
-				entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
-				if tag == entry1.code:
-					entry1.verified = "true"
-					entry1.mcname = name
-					entry1.put()
-					self.redirect('/')
+			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname:
+				if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
+					self.response.out.write("You have not issued the /getverifcode command yet.")
 				else:
-					self.response.out.write("Incorrect code.")
+					tag = self.request.get('code')
+					name = self.request.get('mcname')
+					entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
+					if tag == entry1.code and name == entry1.mcname:
+						entry1.verified = "true"
+						entry1.mcname = name
+						entry1.put()
+						self.redirect('/')
+					else:
+						self.response.out.write("Incorrect code.")
 			else:
 				self.redirect('/')
 		else:
@@ -296,14 +299,33 @@ class verify(webapp.RequestHandler):
 		</form></body></html>\n''')
 class getcode(webapp.RequestHandler):
 	def post(self):
+		self.response.out.write('''
+		<html><body>
+		<form action="/verify" method="post"
+		enctype=application/x-www-form-urlencoded>
+		Please type /getverifcode your-google@email into minecraft to get the vefification code.
+		<p>Code<input type="text" name="code"></p>
+		MineCraft Name<input type="text" name="mcname">
+		<input type="text" name="user">
+		</form></body></html>\n''')
 		user = self.request.get('user')
 		code = self.request.get('code')
+		name = self.request.get('mcname')
 		entry = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", user).get()
 		entry.code = code
+		entry.mcname = name
 		entry.put()
 	def get(self):
 		self.response.out.write("If you are looking to hack this site then think again")
-
+		self.response.out.write('''
+		<html><body>
+		<form action="/verify" method="post"
+		enctype=application/x-www-form-urlencoded>
+		Please type /getverifcode your-google@email into minecraft to get the vefification code.
+		<p>Code<input type="text" name="code"></p>
+		MineCraft Name<input type="text" name="mcname">
+		<input type="text" name="user">
+		</form></body></html>\n''')
 
 ### Show the API
 def write_available_operations(self):

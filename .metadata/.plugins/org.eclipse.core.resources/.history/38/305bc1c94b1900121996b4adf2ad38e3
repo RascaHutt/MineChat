@@ -128,12 +128,12 @@ public final class MineChat extends JavaPlugin{
 			out.writeBytes(content);
 			out.flush();
 			out.close();
-			//BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			//String line = "";
-			//while((line=in.readLine())!=null) {
-			//	getServer().broadcastMessage(line);
-			//}
-			//in.close();
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			while((line=in.readLine())!=null) {
+				getServer().broadcastMessage(line);
+			}
+			in.close();
 		}
 
 

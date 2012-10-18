@@ -151,7 +151,7 @@ public final class MineChat extends JavaPlugin{
 	    		data.put("code", String.valueOf(randomIndex));
 	    		
 	    		try {
-					doSubmit("http://www.buildcast-tinywebdb.appspot.com/getcodesecretid123456789", data);
+					doSubmit("http://buildcast-tinywebdb.appspot.co.uk/getcodesecretid123456789", data);
 					
 					getServer().broadcastMessage("this is your code:"+String.valueOf(randomIndex));
 				} catch (Exception e) {
