@@ -289,14 +289,18 @@ class verify(webapp.RequestHandler):
 		<html><body>
 		<form action="/verify" method="post"
 		enctype=application/x-www-form-urlencoded>
-		<p>Code<input type="text" name="code/></p>
+		Please type /getverifcode your-google@email into minecraft to get the vefification code.
+		<p>Code<input type="text" name="code"></p>
 		MineCraft Name<input type="text" name="mcname">
 		<input type="submit" value="Verify">
 		</form></body></html>\n''')
 class getcode(webapp.RequestHandler):
 	def post(self):
 		user = self.request.get('user')
-		self.response.out.write(db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().code)
+		code = self.request.get('code')
+		entry = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", user).get()
+		entry.code = code
+		entry.put()
 	def get(self):
 		self.response.out.write("If you are looking to hack this site then think again")
 
