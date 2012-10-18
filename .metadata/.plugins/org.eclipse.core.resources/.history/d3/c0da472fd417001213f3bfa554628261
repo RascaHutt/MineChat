@@ -1,0 +1,20 @@
+name: MineChat
+main: tk.mhutti1.minechat.MineChat
+version: 1
+commands:
+   diamonds:
+      description: Gives 64 Diamonds
+      usage: /<command> [player]
+      permission: <plugin name>.mhutti1.special
+      permission-message: You don't have <permission>
+   pickaxe:
+      description: Gives enchanted pickaxe
+      usage: /<command> [player]
+      permission: <plugin name>.mhutti1.special
+      permission-message: You don't have <permission>
+   mhutti1:
+      description: Gives mhutti1 special powers
+      usage: /<command> [player]
+permissions:
+    special:
+        default: op

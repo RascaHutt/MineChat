@@ -1,0 +1,12 @@
+name: MineChat
+main: tk.mhutti1.minechat.MineChat
+version: 1
+commands:
+   basic:
+      description: This is a demo command.
+      usage: /<command> [player]
+      permission: <plugin name>.mhutti1.special
+      permission-message: You don't have <permission>
+permissions:
+    special:
+        default: op
