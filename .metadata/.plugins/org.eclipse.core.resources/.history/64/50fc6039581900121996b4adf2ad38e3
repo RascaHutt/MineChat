@@ -128,12 +128,12 @@ public final class MineChat extends JavaPlugin{
 			out.writeBytes(content);
 			out.flush();
 			out.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			while((line=in.readLine())!=null) {
-				//getServer().broadcastMessage(line);
-			}
-			in.close();
+			//BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			//String line = "";
+			//while((line=in.readLine())!=null) {
+			//	getServer().broadcastMessage(line);
+			//}
+			//in.close();
 		}
 
 
@@ -167,10 +167,9 @@ public final class MineChat extends JavaPlugin{
 	    		// doSomething
 	    		if (sender instanceof Player) {
 	    		Player player = (Player) sender;
-	    		String message;
-	    		message = "";
+	    		String message
 	    		for (String a : args){
-	    			message = message + " " + a;
+	    			
 	    		}
 	    		Map<String, String> data = new HashMap<String, String>();
 	    		data.put("user", player.getDisplayName());

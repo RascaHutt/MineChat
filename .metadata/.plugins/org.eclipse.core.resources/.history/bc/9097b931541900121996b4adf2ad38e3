@@ -5,6 +5,6 @@ commands:
    getverifcode:
       description: verifies user
       usage: /<command> <email>
-   webchat:
+	webchat:
       description: chats to web
       usage: /<command> <text>

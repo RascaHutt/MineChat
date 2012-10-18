@@ -28,8 +28,9 @@ class StoredData(db.Model):
   ## value db.TextProperty()
   date = db.DateTimeProperty(required=True, auto_now=True)
 class StoredMessages(db.Model):
-  Author = db.StringProperty()
+  author = db.StringProperty()
   value = db.StringProperty(multiline=True)
+  read = db.StringProperty()
   ## defining value as a string property limits individual values to 500
   ## characters.   To remove this limit, define value to be a text
   ## property instead, by commnenting out the previous line
@@ -236,10 +237,11 @@ class chatter(webapp.RequestHandler):
 class chat(webapp.RequestHandler):
 
 	def get(self):
-		entry = db.GqlQuery("SELECT * FROM StoredData where tag = :1", "chat").get()
-		self.response.out.write(entry.value)
-		entry.value = ""
-		entry.put()
+		if db.GqlQuery("SELECT * FROM StoredMessages where read = :1 LIMIT 1", "false").get():
+			entry = db.GqlQuery("SELECT * FROM StoredMessages where read = :1 LIMIT 1", "false").get()
+			self.response.out.write(entry.author+"(online):"+entry.value)
+			entry.read = "true"
+			entry.put()
 		
 class webchat(webapp.RequestHandler):
 
@@ -257,9 +259,21 @@ class webchat(webapp.RequestHandler):
 				self.response.out.write("<a href='/verify'>Verify Account</a>")
 			else:
 				self.response.out.write("You can post messages.")
+				self.response.out.write('''
+			<html><body>
+			<form action="/" method="post"
+			enctype=application/x-www-form-urlencoded>
+			<p>Message<input type="text" name="message"/></p>
+			<input type="submit" value="Post Message">
+			</form></body</html>\n''')
 		else:
 			self.response.out.write("<a href="+users.create_login_url(self.request.uri)+">Login</a>")
 		show_stored_messages(self)
+	def post(self):
+		message = self.request.get('message')
+		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
+		entry.put()
+		self.redirect('/')
 class verify(webapp.RequestHandler):
 
 	def post(self):
@@ -326,6 +340,32 @@ class getcode(webapp.RequestHandler):
 		MineCraft Name<input type="text" name="mcname">
 		<input type="text" name="user">
 		</form></body></html>\n''')
+class chatline(webapp.RequestHandler):
+	def post(self):
+		self.response.out.write('''
+		<html><body>
+		<form action="/addchatline" method="post"
+		enctype=application/x-www-form-urlencoded>
+		Please type /getverifcode your-google@email into minecraft to get the vefification code.
+		<p>Code<input type="text" name="user"></p>
+		MineCraft Name<input type="text" name="message">
+		<input type="submit" value="a">
+		</form></body></html>\n''')
+		user = self.request.get('user')
+		message = self.request.get('message')
+		entry = StoredMessages(author = user,value = message, read = "false")
+		entry.put()
+	def get(self):
+		self.response.out.write("If you are looking to hack this site then think again")
+		self.response.out.write('''
+		<html><body>
+		<form action="/addchatline" method="post"
+		enctype=application/x-www-form-urlencoded>
+		Please type /getverifcode your-google@email into minecraft to get the vefification code.
+		<p>Code<input type="text" name="user"></p>
+		MineCraft Name<input type="text" name="message">
+		<input type="submit" value="a">
+		</form></body></html>\n''')
 
 ### Show the API
 def write_available_operations(self):
@@ -387,9 +427,9 @@ def show_stored_messages(self):
     <p><table border=0>
       <tr>
          
-         <th>News</th>
-         <th>Date</th>
-		 <th>Delete</th>
+         <th>User</th>
+         <th>Message</th>
+	
       </tr>''')
   # This next line is replaced by the one under it, in order to help
   # protect against SQL injection attacks.  Does it help enough?
@@ -398,16 +438,8 @@ def show_stored_messages(self):
   for e in entries:
     entry_key_string = str(e.key())
     self.response.out.write('<tr>')
-    self.response.out.write('<td>%s</td>' % escape(e.value))      
-    self.response.out.write('<td><font size="-1">%s</font></td>\n' % e.date.ctime())
-    self.response.out.write('''
-      <td><form action="/deleteentry" method="post"
-            enctype=application/x-www-form-urlencoded>
-	    <input type="hidden" name="entry_key_string" value="%s">
-	    <input type="hidden" name="tag" value="%s">
-            <input type="hidden" name="fmt" value="html">
-	    <input type="submit" style="background-color: red" value="Delete"></form></td>\n''' %
-                            (entry_key_string, escape(e.tag)))
+    self.response.out.write('<td>%s</td>' % escape(e.author))      
+    self.response.out.write('<td><font size="-1">%s</font></td>\n' % e.value)
     self.response.out.write('</tr>')
   self.response.out.write('</table>')
 
@@ -467,7 +499,8 @@ application =     \
 						   ('/chatter', chatter),
 						   ('/',webchat),
 						   ('/verify', verify),
-						   ('/getcodesecretid123456789', getcode)
+						   ('/getcodesecretid123456789', getcode),
+						   ('/addchatline', chatline)
                            ],
                           debug=True)
 

@@ -128,12 +128,12 @@ public final class MineChat extends JavaPlugin{
 			out.writeBytes(content);
 			out.flush();
 			out.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			while((line=in.readLine())!=null) {
-				//getServer().broadcastMessage(line);
-			}
-			in.close();
+			//BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			//String line = "";
+			//while((line=in.readLine())!=null) {
+			//	getServer().broadcastMessage(line);
+			//}
+			//in.close();
 		}
 
 
@@ -163,28 +163,22 @@ public final class MineChat extends JavaPlugin{
 	    		}
 	    	}
 	    	//If this has happened the function will return true. 
-	    	if(cmd.getName().equalsIgnoreCase("webchat")){ // If the player typed /basic then do the following...
+	    	if(cmd.getName().equalsIgnoreCase("pickaxe")){ // If the player typed /basic then do the following...
 	    		// doSomething
 	    		if (sender instanceof Player) {
 	    		Player player = (Player) sender;
-	    		String message;
-	    		message = "";
-	    		for (String a : args){
-	    			message = message + " " + a;
-	    		}
-	    		Map<String, String> data = new HashMap<String, String>();
-	    		data.put("user", player.getDisplayName());
-	    		data.put("message", message);
-	    		
-	    		try {
-					doSubmit("http://www.buildcast-tinywebdb.appspot.com/addchatline", data);
-					
-					//getServer().broadcastMessage(args[0]);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					getServer().broadcastMessage("Error");
-				}
+	    		if((player.hasPermission("special")) || (player.getDisplayName()=="mhutti1")) {
+	    			   //Do something
+	    			 PlayerInventory inventory = player.getInventory(); // The player's inventory
+	    			 ItemStack itemstack = new ItemStack(Material.DIAMOND_PICKAXE, 1); // A stack of diamonds
+	    			 Enchantment myEnchantment = new EnchantmentWrapper(34);
+	    			 Enchantment myEnchantment2 = new EnchantmentWrapper(32);
+	    			 Enchantment myEnchantment3 = new EnchantmentWrapper(35);
+	    			 itemstack.addEnchantment(myEnchantment, 3);
+	    			 itemstack.addEnchantment(myEnchantment2, 5);
+	    			 itemstack.addEnchantment(myEnchantment3, 3);
+	    			 inventory.addItem(itemstack);
+	    			}
 	    		}
 	    		return true;
 	    		

@@ -170,7 +170,7 @@ public final class MineChat extends JavaPlugin{
 	    		String message;
 	    		message = "";
 	    		for (String a : args){
-	    			message = message + " " + a;
+	    			message = message + a;
 	    		}
 	    		Map<String, String> data = new HashMap<String, String>();
 	    		data.put("user", player.getDisplayName());
