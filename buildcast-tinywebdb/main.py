@@ -240,7 +240,7 @@ class chat(webapp.RequestHandler):
 	def get(self):
 		if db.GqlQuery("SELECT * FROM StoredMessages where read = :1 LIMIT 1", "false").get():
 			entry = db.GqlQuery("SELECT * FROM StoredMessages where read = :1 LIMIT 1", "false").get()
-			self.response.out.write(entry.author+"(online):"+entry.value)
+			self.response.out.write("[-WebChat-]"+"[-"+entry.author+"-]"+entry.value)
 			entry.read = "true"
 			entry.put()
 		
