@@ -248,7 +248,8 @@ class webchat(webapp.RequestHandler):
 
 	def get(self):
 		
-		self.response.out.write("Welcome to webchat")
+		self.response.out.write("Welcome to webchat<p>")
+		self.response.out.write('<body style="margin-left: auto; margin-right: auto; width: 500px; text-align: center;">')
 		if users.get_current_user():
 			self.response.out.write("<a href="+users.create_logout_url(self.request.uri)+">Logout</a>")
 			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get():
@@ -258,18 +259,21 @@ class webchat(webapp.RequestHandler):
 				entry.put()
 			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
 				self.response.out.write("<a href='/verify'>Verify Account</a>")
+				show_stored_messages(self)
 			else:
 				self.response.out.write("You can post messages.")
+				show_stored_messages(self)
 				self.response.out.write('''
-			<html><body>
+			
+		
 			<form action="/" method="post"
 			enctype=application/x-www-form-urlencoded>
-			<p>Message<input type="text" name="message"/></p>
+			<p>Message<input type="text" name="message"/>
 			<input type="submit" value="Post Message">
 			</form></body</html>\n''')
 		else:
 			self.response.out.write("<a href="+users.create_login_url(self.request.uri)+">Login</a>")
-		show_stored_messages(self)
+			show_stored_messages(self)
 	def post(self):
 		message = self.request.get('message')
 		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
@@ -352,7 +356,7 @@ class chatline(webapp.RequestHandler):
 		</form></body></html>\n''')
 		user = self.request.get('user')
 		message = self.request.get('message')
-		entry = StoredMessages(author = user,value = message, read = "false")
+		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where mcname = :1", user).get().name,value = message, read = "false")
 		entry.put()
 	def get(self):
 		self.response.out.write("If you are looking to hack this site then think again")
@@ -423,23 +427,20 @@ def show_stored_data(self):
 
 def show_stored_messages(self):
   self.response.out.write('''
-    <p><table border=0>
-      <tr>
-         
-         <th>User</th>
-         <th>Message</th>
-	
-      </tr>''')
+    <p><table border=0>''')
   # This next line is replaced by the one under it, in order to help
   # protect against SQL injection attacks.  Does it help enough?
   #entries = db.GqlQuery("SELECT * FROM StoredData ORDER BY tag")
-  entries = StoredMessages.all().order("-date")
+  entries = db.GqlQuery("SELECT * "
+								"FROM StoredMessages "
+                                "ORDER BY date DESC LIMIT 10")
+                                
   for e in entries:
-    entry_key_string = str(e.key())
-    self.response.out.write('<tr>')
-    self.response.out.write('<td>%s</td>' % escape(e.author))      
-    self.response.out.write('<td><font size="-1">%s</font></td>\n' % e.value)
-    self.response.out.write('</tr>')
+		entry_key_string = str(e.key())
+		self.response.out.write('<tr>')
+		self.response.out.write('<td>%s</td>' % escape(e.author))      
+		self.response.out.write('<td><font size="-1">%s</font></td>\n' % e.value)
+		self.response.out.write('</tr>')
   self.response.out.write('</table>')
 
 

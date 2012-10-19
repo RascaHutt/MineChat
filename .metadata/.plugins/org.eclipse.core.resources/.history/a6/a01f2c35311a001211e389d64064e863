@@ -140,7 +140,24 @@ public final class MineChat extends JavaPlugin{
 			in.close();
 		}
 
-	
+	    @EventHandler
+	    public void onPlayerChat(AsyncPlayerChatEvent chat){
+	   Player player = chat.getPlayer();
+	   String message = chat.getMessage();
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("user", player.getDisplayName());
+		data.put("message", message);
+		
+		try {
+			doSubmit("http://www.buildcast-tinywebdb.appspot.com/addchatline", data);
+			
+			//getServer().broadcastMessage(args[0]);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			getServer().broadcastMessage("Error");
+		}
+	    }
 	    
 	    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 	    	if(cmd.getName().equalsIgnoreCase("getverifcode")){ // If the player typed /basic then do the following...

@@ -14,4 +14,4 @@ commands:
   permission-message: You don't have <permission>
 permissions:
  MineChat.special:
-  default: true
+  default: op

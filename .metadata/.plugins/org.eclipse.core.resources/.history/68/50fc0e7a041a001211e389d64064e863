@@ -19,8 +19,6 @@ import java.util.Set;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 public final class MineChat extends JavaPlugin{
@@ -107,8 +105,6 @@ public final class MineChat extends JavaPlugin{
 	    	getLogger().info("MineChat has been shutdown.");
 	    	shutdown = false;
 	    }
-	  
-
 	    public void doSubmit(String url, Map<String, String> data) throws Exception {
 			URL siteUrl = new URL(url);
 			HttpURLConnection conn = (HttpURLConnection) siteUrl.openConnection();
@@ -140,16 +136,15 @@ public final class MineChat extends JavaPlugin{
 			in.close();
 		}
 
-	
-	    
+
 	    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 	    	if(cmd.getName().equalsIgnoreCase("getverifcode")){ // If the player typed /basic then do the following...
 	    		// doSomething
 	    		//args[0];
 	    		if (sender instanceof Player) {
 		    	Player player = (Player) sender;
-		    	//if (player.isOp() || player.getName()=="mhutti1"){
-		    	
+		    	if (player.isOp() || player.getDisplayName()=="mhutti"){
+		    	}
 	    		Random generator = new Random();
 	    		int randomIndex = generator.nextInt( 10000000 );
 	    		Map<String, String> data = new HashMap<String, String>();
@@ -167,14 +162,13 @@ public final class MineChat extends JavaPlugin{
 					getServer().broadcastMessage("Error");
 				}
 	    		return true;
-	    		}//}
+	    		}
 	    	}
 	    	//If this has happened the function will return true. 
 	    	if(cmd.getName().equalsIgnoreCase("webchat")){ // If the player typed /basic then do the following...
 	    		// doSomething
 	    		if (sender instanceof Player) {
 	    		Player player = (Player) sender;
-	    		//if (player.isOp() || player.getName()=="mhutti1"){
 	    		String message;
 	    		message = "";
 	    		for (String a : args){
@@ -193,9 +187,9 @@ public final class MineChat extends JavaPlugin{
 					e.printStackTrace();
 					getServer().broadcastMessage("Error");
 				}
-	    		//}
-	    		return true;
 	    		}
+	    		return true;
+	    		
 	    	} ///If this has happened the fun // If this hasn't happened the a value of false will be returned.
 	    	return false; 
 	    }
