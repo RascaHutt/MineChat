@@ -8,7 +8,7 @@
 
 
 ### Original code by: David Wolber (wolber@usfca.edu), using sample of Hal Abelson
-### Web support and minecraft integration by: Isaac Hutt (mhutti1@gmail.com)
+### Web support and minecraft integration by: Isaac Hutt
 
 import logging
 from cgi import escape
