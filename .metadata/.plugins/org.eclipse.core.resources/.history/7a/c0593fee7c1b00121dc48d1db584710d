@@ -153,6 +153,7 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		if (sender instanceof Player) {
 		    	Player player = (Player) sender;
 		    	//if (player.isOp() || player.getName()=="mhutti1"){
+		    	
 	    		Random generator = new Random();
 	    		int randomIndex = generator.nextInt( 10000000 );
 	    		Map<String, String> data = new HashMap<String, String>();

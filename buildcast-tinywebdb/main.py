@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
 ###
 ### This is a web service for use with App
 ### Inventor for Android (<http://appinventor.googlelabs.com>)
@@ -248,7 +249,7 @@ class webchat(webapp.RequestHandler):
 
 	def get(self):
 		
-		self.response.out.write("Welcome to webchat<p>")
+		self.response.out.write("Welcome to webchat<p><a href='/'>Refresh</a><p>")
 		self.response.out.write('<body style="margin-left: auto; margin-right: auto; width: 500px; text-align: center;">')
 		if users.get_current_user():
 			self.response.out.write("<a href="+users.create_logout_url(self.request.uri)+">Logout</a>")
@@ -258,15 +259,68 @@ class webchat(webapp.RequestHandler):
 				entry = StoredUsers(name = users.get_current_user().nickname(),email = users.get_current_user().email(), ID = users.get_current_user().user_id(), mcname = "")
 				entry.put()
 			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
-				self.response.out.write("<a href='/verify'>Verify Account</a>")
+				self.response.out.write("Type /getverifcode <google email> into minecraft to get verified")
 				show_stored_messages(self)
 			else:
 				self.response.out.write("You can post messages.")
+				###self.response.out.write("Your code for the app is: "+ db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().code)
 				show_stored_messages(self)
+				entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
+				entry1.verified = "true"
 				self.response.out.write('''
 			
 		
 			<form action="/" method="post"
+			enctype=application/x-www-form-urlencoded>
+			<p>Message<input type="text" name="message"/>
+			<input type="submit" value="Post Message">
+			</form><p>
+			</body</html>\n''')
+		else:
+			self.response.out.write("<a href="+users.create_login_url(self.request.uri)+">Login</a>")
+			show_stored_messages(self)
+		self.response.out.write('''<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1806054329329021";
+/* Banner */
+google_ad_slot = "6935581472";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>''')
+	def post(self):
+		message = self.request.get('message')
+		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
+		entry.put()
+		self.redirect('/')
+class mobile(webapp.RequestHandler):
+
+	def get(self):
+		
+		self.response.out.write("Welcome to webchat<p>")
+		self.response.out.write('<body>')
+		if users.get_current_user():
+			self.response.out.write("<a href="+users.create_logout_url(self.request.uri)+">Logout</a>")
+			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get():
+				login = "true"
+			else:
+				entry = StoredUsers(name = users.get_current_user().nickname(),email = users.get_current_user().email(), ID = users.get_current_user().user_id(), mcname = "")
+				entry.put()
+			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
+				self.response.out.write("Type /getverifcode <google email> into minecraft to get verified")
+				show_stored_messages(self)
+			else:
+				self.response.out.write("You can post messages.")
+				###self.response.out.write("Your code for the app is: "+ db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().code)
+				show_stored_messages(self)
+				entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
+				entry1.verified = "true"
+				self.response.out.write('''
+			
+		
+			<form action="/mobile" method="post"
 			enctype=application/x-www-form-urlencoded>
 			<p>Message<input type="text" name="message"/>
 			<input type="submit" value="Post Message">
@@ -278,44 +332,7 @@ class webchat(webapp.RequestHandler):
 		message = self.request.get('message')
 		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
 		entry.put()
-		self.redirect('/')
-class verify(webapp.RequestHandler):
-
-	def post(self):
-		if users.get_current_user():
-			self.response.out.write("<a href="+users.create_logout_url(self.request.uri)+">Logout</a>")
-			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get():
-				login = "true"
-			else:
-				self.redirect('/')
-			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname:
-				if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
-					self.response.out.write("You have not issued the /getverifcode command yet.")
-				else:
-					tag = self.request.get('code')
-					name = self.request.get('mcname')
-					entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
-					if tag == entry1.code and name == entry1.mcname:
-						entry1.verified = "true"
-						entry1.mcname = name
-						entry1.put()
-						self.redirect('/')
-					else:
-						self.response.out.write("Incorrect code.")
-			else:
-				self.redirect('/')
-		else:
-			self.redirect('/')
-	def get(self):
-		self.response.out.write('''
-		<html><body>
-		<form action="/verify" method="post"
-		enctype=application/x-www-form-urlencoded>
-		Please type /getverifcode your-google@email into minecraft to get the vefification code.
-		<p>Code<input type="text" name="code"></p>
-		MineCraft Name<input type="text" name="mcname">
-		<input type="submit" value="Verify">
-		</form></body></html>\n''')
+		self.redirect('/mobile')
 class getcode(webapp.RequestHandler):
 	def post(self):
 		self.response.out.write('''
@@ -356,7 +373,7 @@ class chatline(webapp.RequestHandler):
 		</form></body></html>\n''')
 		user = self.request.get('user')
 		message = self.request.get('message')
-		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where mcname = :1", user).get().name,value = message, read = "false")
+		entry = StoredMessages(author = user ,value = message, read = "false")
 		entry.put()
 	def get(self):
 		self.response.out.write("If you are looking to hack this site then think again")
@@ -436,6 +453,8 @@ def show_stored_messages(self):
                                 "ORDER BY date DESC LIMIT 10")
                                 
   for e in entries:
+		special = u"§"+"f"
+		e.author = e.author.replace(special, "");
 		entry_key_string = str(e.key())
 		self.response.out.write('<tr>')
 		self.response.out.write('<td>%s</td>' % escape(e.author))      
@@ -498,9 +517,9 @@ application =     \
 						   ('/chat', chat),
 						   ('/chatter', chatter),
 						   ('/',webchat),
-						   ('/verify', verify),
 						   ('/getcodesecretid123456789', getcode),
-						   ('/addchatline', chatline)
+						   ('/addchatline', chatline),
+						   ('/mobile', mobile)
                            ],
                           debug=True)
 

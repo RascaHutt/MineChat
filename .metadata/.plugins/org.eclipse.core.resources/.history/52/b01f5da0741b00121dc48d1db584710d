@@ -99,19 +99,7 @@ public class MineChat extends JavaPlugin implements Listener{
 	    public void onPlayerChat(final AsyncPlayerChatEvent event) {
 	        String message = event.getMessage();
 	        message = message.replaceAll("&([0-9a-fA-F])", "§$1");
-    		Map<String, String> data = new HashMap<String, String>();
-    		data.put("user", event.getPlayer().getDisplayName());
-    		data.put("message", message);
-    		
-    		try {
-				doSubmit("http://www.buildcast-tinywebdb.appspot.com/addchatline", data);
-				
-				//getServer().broadcastMessage(args[0]);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				getServer().broadcastMessage("Error");
-			}
+	        getServer().broadcastMessage("It works!!!");
 	    }
 	    public void doSubmit(String url, Map<String, String> data) throws Exception {
 			URL siteUrl = new URL(url);
@@ -153,6 +141,7 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		if (sender instanceof Player) {
 		    	Player player = (Player) sender;
 		    	//if (player.isOp() || player.getName()=="mhutti1"){
+		    	
 	    		Random generator = new Random();
 	    		int randomIndex = generator.nextInt( 10000000 );
 	    		Map<String, String> data = new HashMap<String, String>();
