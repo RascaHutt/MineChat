@@ -11,7 +11,8 @@
 ### Original code by: David Wolber (wolber@usfca.edu), using sample of Hal Abelson
 ### Web support and minecraft integration by: Isaac Hutt
 
-import logging
+from threading import Thread
+import time
 from cgi import escape
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -244,11 +245,10 @@ class chat(webapp.RequestHandler):
 			self.response.out.write("[-WebChat-]"+"[-"+entry.author+"-]"+entry.value)
 			entry.read = "true"
 			entry.put()
-		
+
 class webchat(webapp.RequestHandler):
 
 	def get(self):
-		
 		self.response.out.write("Welcome to webchat<p><a href='/'>Refresh</a><p>")
 		self.response.out.write('<body style="margin-left: auto; margin-right: auto; width: 500px; text-align: center;">')
 		if users.get_current_user():
@@ -261,6 +261,7 @@ class webchat(webapp.RequestHandler):
 			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
 				self.response.out.write("Type /getverifcode <google email> into minecraft to get verified")
 				show_stored_messages(self)
+
 			else:
 				self.response.out.write("You can post messages.")
 				###self.response.out.write("Your code for the app is: "+ db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().code)
@@ -276,6 +277,8 @@ class webchat(webapp.RequestHandler):
 			<input type="submit" value="Post Message">
 			</form><p>
 			</body</html>\n''')
+
+
 		else:
 			self.response.out.write("<a href="+users.create_login_url(self.request.uri)+">Login</a>")
 			show_stored_messages(self)
@@ -295,6 +298,8 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
 		entry.put()
 		self.redirect('/')
+
+
 class mobile(webapp.RequestHandler):
 
 	def get(self):
@@ -373,7 +378,7 @@ class chatline(webapp.RequestHandler):
 		</form></body></html>\n''')
 		user = self.request.get('user')
 		message = self.request.get('message')
-		entry = StoredMessages(author = user ,value = message, read = "false")
+		entry = StoredMessages(author = user ,value = message, read = "true")
 		entry.put()
 	def get(self):
 		self.response.out.write("If you are looking to hack this site then think again")
@@ -453,8 +458,18 @@ def show_stored_messages(self):
                                 "ORDER BY date DESC LIMIT 10")
                                 
   for e in entries:
-		special = u"§"+"f"
-		e.author = e.author.replace(special, "");
+		special1 = u"§"+"f"
+		special2 = u"§"+"l"
+		special3 = u"§"+"e"
+		special4 = u"§"+"c"
+		special5 = u"§"+"6"
+		special6 = u"§"+"n"
+		e.author = e.author.replace(special1, "");
+		e.author = e.author.replace(special2, "");
+		e.author = e.author.replace(special3, "");
+		e.author = e.author.replace(special4, "");
+		e.author = e.author.replace(special5, "");
+		e.author = e.author.replace(special6, "");
 		entry_key_string = str(e.key())
 		self.response.out.write('<tr>')
 		self.response.out.write('<td>%s</td>' % escape(e.author))      

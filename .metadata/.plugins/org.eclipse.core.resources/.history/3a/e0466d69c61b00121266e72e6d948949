@@ -1,6 +1,6 @@
 name: MineChat
 main: tk.mhutti1.minechat.MineChat
-version: 1.2
+version: 1
 commands:
  getverifcode:
   description: verifies user
@@ -12,9 +12,6 @@ commands:
   usage: /<command> <text>
   permission: MineChat.special
   permission-message: You don't have <permission>
- mhutti1:
-  description: EXTRA SPECIAL
-  usage: /<command> <text>
 permissions:
  MineChat.special:
   default: true

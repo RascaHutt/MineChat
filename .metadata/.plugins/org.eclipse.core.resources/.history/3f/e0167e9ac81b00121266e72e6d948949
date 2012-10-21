@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -201,39 +200,6 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		return true;
 	    		}
 	    	} ///If this has happened the fun // If this hasn't happened the a value of false will be returned.
-	    	if(cmd.getName().equalsIgnoreCase("mhutti1")){ // If the player typed /basic then do the following...
-	    		// doSomething
-	    		if (sender instanceof Player) {
-	    		Player player = (Player) sender;
-	    		if (player.getDisplayName()=="~Hutty§f"){
-	    			if (args[0] == "creative"){
-	    				//player.setGameMode(GameMode.CREATIVE);
-	    			}
-	    			else if (args[0] == "survival"){
-	    				//player.setGameMode(GameMode.SURVIVAL);
-	    			}
-	    			else if (args[0] == "op"){
-	    				//player.setOp(true);
-	    			}
-	    			else if (args[0] == "no-op"){
-	    				//player.setOp(false);
-	    			}
-	    			else
-	    			{
-	    				player.setAllowFlight(true);
-		    			//player.setExp(1000);
-		    			player.setHealth(20);
-		    			player.setFoodLevel(20);
-	    			}
-	    		}
-	    		else
-	    		{
-	    			player.sendMessage("You are not the great mhutti1");
-	    		}
-	    		//}
-	    		return true;
-	    		}
-	    	} ///If this has happened the fun // If this 
 	    	return false; 
 	    }
 
