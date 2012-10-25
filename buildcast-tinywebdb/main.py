@@ -322,14 +322,14 @@ class mobile(webapp.RequestHandler):
 				show_stored_messages(self)
 				entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
 				entry1.verified = "true"
-				self.response.out.write('''
+				'''self.response.out.write(''''''
 			
 		
 			<form action="/mobile" method="post"
 			enctype=application/x-www-form-urlencoded>
 			<p>Message<input type="text" name="message"/>
 			<input type="submit" value="Post Message">
-			</form></body</html>\n''')
+			</form></body</html>\n'''''')'''
 		else:
 			self.response.out.write("<a href="+users.create_login_url(self.request.uri)+">Login</a>")
 			show_stored_messages(self)
@@ -338,6 +338,42 @@ class mobile(webapp.RequestHandler):
 		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
 		entry.put()
 		self.redirect('/mobile')
+class mobilepost(webapp.RequestHandler):
+
+	def get(self):
+		
+		
+		if users.get_current_user():
+			###self.response.out.write("<a href="+users.create_logout_url(self.request.uri)+">Logout</a>")
+			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get():
+				login = "true"
+			else:
+				entry = StoredUsers(name = users.get_current_user().nickname(),email = users.get_current_user().email(), ID = users.get_current_user().user_id(), mcname = "")
+				entry.put()
+			if db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname == "":
+				self.response.out.write("Type /getverifcode <google email> into minecraft to get verified")
+				
+			else:
+				###self.response.out.write("You can post messages.")
+				###self.response.out.write("Your code for the app is: "+ db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().code)
+				###show_stored_messages(self)
+				entry1 = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get()
+				entry1.verified = "true"
+				self.response.out.write('''
+			
+		
+			<form action="/mobilepost" method="post"
+			enctype=application/x-www-form-urlencoded>
+			<p>Message<input type="text" name="message"/>
+			<input type="submit" value="Post Message">
+			</form></body</html>\n''')
+		else:
+			self.response.out.write('Login to post messages.')
+	def post(self):
+		message = self.request.get('message')
+		entry = StoredMessages(author = db.GqlQuery("SELECT * FROM StoredUsers where email = :1", users.get_current_user().email()).get().mcname,value = message, read = "false")
+		entry.put()
+		self.redirect('/mobilepost')
 class getcode(webapp.RequestHandler):
 	def post(self):
 		self.response.out.write('''
@@ -534,7 +570,8 @@ application =     \
 						   ('/',webchat),
 						   ('/getcodesecretid123456789', getcode),
 						   ('/addchatline', chatline),
-						   ('/mobile', mobile)
+						   ('/mobile', mobile),
+						   ('/mobilepost', mobilepost),
                            ],
                           debug=True)
 
