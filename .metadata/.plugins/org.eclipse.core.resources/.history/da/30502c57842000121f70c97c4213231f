@@ -55,7 +55,7 @@ public class Updater extends MineChat
 			String Version_String_Temp = version.toString();
 			Double version_double = Double.parseDouble(Version_String_Temp);
 
-			String version_now = "1.4";
+			String version_now = "1.2";
 			Double version_now_double = Double.parseDouble(version_now);
 
 			if(version_now_double < version_double && version_double > version_now_double)

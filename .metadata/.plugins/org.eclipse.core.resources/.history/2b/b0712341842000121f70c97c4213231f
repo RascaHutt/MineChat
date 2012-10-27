@@ -158,9 +158,9 @@ public class MineChat extends JavaPlugin implements Listener{
 				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
-			} catch (Exception f) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				f.printStackTrace();
+				e.printStackTrace();
 				getServer().broadcastMessage("Error");
 			}
 	    	 
@@ -176,9 +176,9 @@ public class MineChat extends JavaPlugin implements Listener{
 				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
-			} catch (Exception f) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				f.printStackTrace();
+				e.printStackTrace();
 				getServer().broadcastMessage("Error");
 			}
 	    	 
