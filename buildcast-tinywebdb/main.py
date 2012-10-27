@@ -53,6 +53,15 @@ class StoredUsers(db.Model):
   ## and replacing it by this one:
   ## value db.TextProperty()
   date = db.DateTimeProperty(required=True, auto_now=True)
+class OnlineUsers(db.Model):
+  name = db.StringProperty()
+  online = db.StringProperty()
+  ## defining value as a string property limits individual values to 500
+  ## characters.   To remove this limit, define value to be a text
+  ## property instead, by commnenting out the previous line
+  ## and replacing it by this one:
+  ## value db.TextProperty()
+  date = db.DateTimeProperty(required=True, auto_now=True)
 IntroMessage = '''
 <table border=0>
 <tr valign="top">
@@ -235,6 +244,27 @@ class chatter(webapp.RequestHandler):
 		<input type="hidden" name="fmt" value="html">
 		<input type="submit" value="Get value">
 		</form></body></html>\n''')
+class user(webapp.RequestHandler):
+	def post(self):
+		tag = self.request.get('name')
+		value = self.request.get('online')
+		entry1 = db.GqlQuery("SELECT * FROM OnlineUsers where name = :1", tag).get()
+		if (entry1):
+			entry1.online = value
+			entry1.put()
+		else:
+			entry = OnlineUsers(name = tag, online=value)
+			entry.put()
+		self.redirect('/user')
+	def get(self):
+		self.response.out.write('''
+		<html><body>
+		<form action="/user" method="post"
+		enctype=application/x-www-form-urlencoded>
+		<p>Text<input type="text" name="name"/></p>
+		<p>Text<input type="text" name="online"/></p>
+		<input type="submit" value="Post">
+		</form></body></html>\n''')
 ########################################
 #### Procedures used in displaying the main page
 class chat(webapp.RequestHandler):
@@ -277,6 +307,7 @@ class webchat(webapp.RequestHandler):
 			<input type="submit" value="Post Message">
 			</form><p>
 			</body</html>\n''')
+				show_online_users(self)
 
 
 		else:
@@ -512,7 +543,35 @@ def show_stored_messages(self):
 		self.response.out.write('<td><font size="-1">%s</font></td>\n' % e.value)
 		self.response.out.write('</tr>')
   self.response.out.write('</table>')
-
+def show_online_users(self):
+  self.response.out.write('''
+    <p><table border=0>''')
+  # This next line is replaced by the one under it, in order to help
+  # protect against SQL injection attacks.  Does it help enough?
+  #entries = db.GqlQuery("SELECT * FROM StoredData ORDER BY tag")
+  entries = db.GqlQuery("SELECT * "
+								"FROM OnlineUsers "
+                                "ORDER BY date DESC LIMIT 50")
+                                
+  for e in entries:
+	if e.online == "true":
+		special1 = u"§"+"f"
+		special2 = u"§"+"l"
+		special3 = u"§"+"e"
+		special4 = u"§"+"c"
+		special5 = u"§"+"6"
+		special6 = u"§"+"n"
+		e.name = e.name.replace(special1, "");
+		e.name = e.name.replace(special2, "");
+		e.name = e.name.replace(special3, "");
+		e.name =e.name.replace(special4, "");
+		e.name =e.name.replace(special5, "");
+		e.name = e.name.replace(special6, "");
+		entry_key_string = str(e.key())
+		self.response.out.write('<tr>')
+		self.response.out.write('<td>%s</td>' % escape(e.name))      
+		self.response.out.write('</tr>')
+  self.response.out.write('</table>')
 
 #### Utilty procedures for generating the output
 
@@ -572,6 +631,7 @@ application =     \
 						   ('/addchatline', chatline),
 						   ('/mobile', mobile),
 						   ('/mobilepost', mobilepost),
+						   ('/user', user),
                            ],
                           debug=True)
 

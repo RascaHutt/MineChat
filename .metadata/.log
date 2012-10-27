@@ -483,3 +483,13 @@ Java Model Exception: Java Model Status [Timed out while retrieving the attached
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1012 2012-10-21 22:48:35.312
 !MESSAGE Timed out while retrieving the attached javadoc for Player [in Player.class [in org.bukkit.entity [in C:\Documents and Settings\Administrator\My Documents\Downloads\bukkit-1.3.2-R1.1-20121016.051357-7.jar]]] 
+!SESSION 2012-10-27 20:19:24.949 -----------------------------------------------
+eclipse.buildId=M20120914-1800
+java.version=1.7.0_09
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_GB
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2012-10-27 20:20:17.991
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
