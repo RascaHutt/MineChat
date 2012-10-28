@@ -50,6 +50,8 @@
 		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
 		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\mhutti1\Documents\Projects\MineChat\buildcast-tinywebdb\images\MineChat.jar"/>
+			<item value="C:\Users\mhutti1\Documents\Projects\MineChat\MineChat.jar"/>
 			<item value="C:\Documents and Settings\Administrator\My Documents\Downloads\test server\plugins\MineChat.jar"/>
 			<item value="C:\Documents and Settings\Administrator\My Documents\Downloads\test server\MineChat.jar"/>
 		</list>

@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,11 +26,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 public class MineChat extends JavaPlugin implements Listener{
 	 private static  Plugin MineChat = null;
@@ -156,7 +155,7 @@ public class MineChat extends JavaPlugin implements Listener{
     		data.put("online","true");
     		
     		try {
-				doSubmit("http://www.buildcast-tinywebdb.appspot.com/user", data);
+				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
 			} catch (Exception f) {
@@ -174,7 +173,7 @@ public class MineChat extends JavaPlugin implements Listener{
     		data.put("online","false");
     		
     		try {
-				doSubmit("http://www.buildcast-tinywebdb.appspot.com/user", data);
+				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
 			} catch (Exception f) {
@@ -271,7 +270,6 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		//}
 	    		return true;
 	    		}
-	    		
 	    	} ///If this has happened the fun // If this 
 	    	return false; 
 	    }

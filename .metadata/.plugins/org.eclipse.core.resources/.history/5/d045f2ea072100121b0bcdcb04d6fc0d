@@ -174,7 +174,7 @@ public class MineChat extends JavaPlugin implements Listener{
     		data.put("online","false");
     		
     		try {
-				doSubmit("http://www.buildcast-tinywebdb.appspot.com/user", data);
+				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
 			} catch (Exception f) {
@@ -271,7 +271,24 @@ public class MineChat extends JavaPlugin implements Listener{
 	    		//}
 	    		return true;
 	    		}
-	    		
+	    		if(cmd.getName().equalsIgnoreCase("minechatrestart")){ // If the player typed /basic then do the following...
+		    		// doSomething
+	    			PluginManager manager = getServer().getPluginManager();
+	    			try {
+						manager.loadPlugin(getFile());
+					} catch (UnknownDependencyException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvalidPluginException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvalidDescriptionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	    			manager.disablePlugin(MineChat);
+		    		return true;
+		    	} ///If this has happene
 	    	} ///If this has happened the fun // If this 
 	    	return false; 
 	    }

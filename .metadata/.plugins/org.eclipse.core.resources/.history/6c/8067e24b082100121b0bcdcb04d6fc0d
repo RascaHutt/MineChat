@@ -174,7 +174,7 @@ public class MineChat extends JavaPlugin implements Listener{
     		data.put("online","false");
     		
     		try {
-				doSubmit("http://www.buildcast-tinywebdb.appspot.com/user", data);
+				doSubmit("http://www.buildcast-tinywebdb.appspot.com/users", data);
 				
 				//getServer().broadcastMessage(args[0]);
 			} catch (Exception f) {

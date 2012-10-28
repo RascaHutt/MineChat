@@ -306,6 +306,7 @@ class webchat(webapp.RequestHandler):
 			<p>Message<input type="text" name="message"/>
 			<input type="submit" value="Post Message">
 			</form><p>
+			Online users (beta):<p>
 			</body</html>\n''')
 				show_online_users(self)
 
